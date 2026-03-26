@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인지원 · Project Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8e4df;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+        }
+
+        /* A4 PAGE */
+        .pg {
+            width: 794px;
+            min-height: 1123px;
+            margin: 28px auto;
+            background: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* COLOR VARS per project */
+        .c1 {
+            --ac: #16a34a;
+            --al: #dcfce7;
+            --am: #bbf7d0;
+        }
+
+        .c2 {
+            --ac: #1d4ed8;
+            --al: #dbeafe;
+            --am: #bfdbfe;
+        }
+
+        .c3 {
+            --ac: #7c3aed;
+            --al: #f5f3ff;
+            --am: #e9d5ff;
+        }
+
+        .c4 {
+            --ac: #065f46;
+            --al: #d1fae5;
+            --am: #a7f3d0;
+        }
+
+        .c5 {
+            --ac: #b45309;
+            --al: #fef3c7;
+            --am: #fde68a;
+        }
+
+        .c6 {
+            --ac: #0369a1;
+            --al: #dbeafe;
+            --am: #bfdbfe;
+        }
+
+        /* TOP STRIPE */
+        .stripe {
+            height: 5px;
+            width: 100%;
+            background: var(--ac, #333);
+        }
+
+        /* PAGE HEADER */
+        .ph {
+            padding: 18px 40px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .ph-num {
+            font-family: 'Normal', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            color: #bbb;
+        }
+
+        .ph-name {
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            color: #bbb;
+            letter-spacing: 0.1em;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 20px 40px 16px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .proj-label {
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ac);
+            margin-bottom: 6px;
+        }
+
+        .proj-title {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .proj-sub {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .bd {
+            font-family: 'normal', monospace;
+            font-size: 8px;
+            padding: 2px 7px;
+            border-radius: 3px;
+        }
+
+        .bd-d {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .bd-l {
+            background: #f4f4f4;
+            color: #555;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+            padding-top: 2px;
+        }
+
+        .sv {
+            font-family: 'normal', monospace;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1;
+            color: var(--ac);
+        }
+
+        .sl {
+            font-size: 9px;
+            color: #888;
+            margin-top: 1px;
+            text-align: right;
+        }
+
+        .div {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0 40px;
+        }
+
+        /* BODY */
+        .body {
+            padding: 16px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .r2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .r3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .r32 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+
+        .r23 {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 12px;
+        }
+
+        .span2 {
+            grid-column: span 2;
+        }
+
+        .span3 {
+            grid-column: span 3;
+        }
+
+        /* CARD */
+        .card {
+            border: 1px solid #ebebeb;
+            border-radius: 10px;
+            padding: 14px 16px;
+            background: #fafafa;
+        }
+
+        .ct {
+            font-family: 'normal', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .ct::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e5e5;
+        }
+
+        /* FLOW */
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+            row-gap: 5px;
+        }
+
+        .fb {
+            font-size: 11px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .fa {
+            font-size: 11px;
+            color: #ccc;
+            padding: 0 3px;
+        }
+
+        /* STEPS */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .step {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .sd {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            font-weight: 500;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .st-t {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 1px;
+        }
+
+        .st-d {
+            font-size: 10px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* RESULT */
+        .ri {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border-left: 3px solid var(--ac);
+            background: var(--al);
+        }
+
+        .ri:last-child {
+            margin-bottom: 0;
+        }
+
+        .ri-t {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ac);
+            margin-bottom: 1px;
+        }
+
+        .ri-d {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* BAR */
+        .br {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+
+        .bl {
+            font-family: 'normal', monospace;
+            font-size: 10px;
+            color: #666;
+            width: 52px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .bt {
+            flex: 1;
+            height: 16px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .bf {
+            height: 100%;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding-left: 6px;
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* TECH */
+        .techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tech {
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            background: #efefef;
+            color: #444;
+        }
+
+        /* INFO */
+        .ir {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            padding: 7px 0;
+            border-bottom: 1px solid #f4f4f4;
+        }
+
+        .ir:last-child {
+            border-bottom: none;
+        }
+
+        .ik {
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            min-width: 52px;
+            text-align: center;
+            background: var(--ac);
+        }
+
+        .iv {
+            font-size: 11px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        .pf {
+            padding: 10px 40px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ft {
+            font-family: 'normal', monospace;
+            font-size: 9px;
+            color: #bbb;
+            letter-spacing: 0.1em;
+        }
+
+        /* REVIEW BUBBLE */
+        .rb {
+            border-radius: 7px;
+            padding: 7px 10px;
+            margin-bottom: 6px;
+        }
+
+        .rb:last-child {
+            margin-bottom: 0;
+        }
+
+        /* INDEX PAGE */
+        .idx-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 60px 40px;
+        }
+
+        .idx-name {
+            font-size: 52px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .idx-name em {
+            font-style: normal;
+            color: #1a1a1a;
+        }
+
+        .idx-role {
+            font-family: 'normal', monospace;
+            font-size: 13px;
+            color: #888;
+            letter-spacing: 0.15em;
+            margin-bottom: 48px;
+        }
+
+        .idx-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            width: 100%;
+        }
+
+        .idx-card {
+            border-radius: 12px;
+            padding: 20px 18px;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .idx-num {
+            font-family: 'normal', monospace;
+            font-size: 10px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        .idx-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .idx-sub {
+            font-size: 10px;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .idx-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 10px;
+        }
+
+        .idx-tag {
+            font-family: 'normal', monospace;
+            font-size: 8px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .idx-bottom {
+            padding: 32px 60px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .idx-quote {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+            max-width: 400px;
+            font-style: italic;
+        }
+
+        .idx-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .idx-sv {
+            font-family: 'Normal', monospace;
+            font-size: 26px;
+            font-weight: 500;
+        }
+
+        .idx-sl {
+            font-size: 9px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+            }
+
+            .pg {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════ INDEX PAGE ══════════ -->
+    <div class="pg">
+        <div class="idx-hero">
+            <div style="width:100%;margin-bottom:40px">
+                <div
+                    style="font-family:'Normal',monospace;font-size:10px;color:#bbb;letter-spacing:0.2em;margin-bottom:16px">
+                    PROJECT PORTFOLIO</div>
+                <div style="font-size:56px;font-weight:700;letter-spacing:-0.03em;line-height:0.95;margin-bottom:10px">
+                    인지원</div>
+                <div style="width:60px;height:3px;background:#1a1a1a;margin-top:20px;border-radius:2px"></div>
+            </div>
+
+            <div class="idx-grid">
+                <!-- 01 -->
+                <div class="idx-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0">
+                    <div class="idx-num">01</div>
+                    <div class="idx-title" style="color:#15803d">When&Where<br>감정분석 추천</div>
+                    <div class="idx-sub" style="color:#166534">20만 리뷰 NLP 분석<br>K-Means 장소 추천</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#15803d">NLP</span>
+                        <span class="idx-tag" style="color:#15803d">Python</span>
+                    </div>
+                </div>
+                <!-- 02 -->
+                <div class="idx-card" style="background:#eff6ff;border:1.5px solid #bfdbfe">
+                    <div class="idx-num">02</div>
+                    <div class="idx-title" style="color:#1d4ed8">Graph RAG<br>AI 지식 체계</div>
+                    <div class="idx-sub" style="color:#1e40af">기술진단 사례<br>지식 그래프 구축</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#1d4ed8">Graph RAG</span>
+                        <span class="idx-tag" style="color:#1d4ed8">LLM</span>
+                    </div>
+                </div>
+                <!-- 03 -->
+                <div class="idx-card" style="background:#f5f3ff;border:1.5px solid #e9d5ff">
+                    <div class="idx-num">03</div>
+                    <div class="idx-title" style="color:#7c3aed">HEC-RAS × Claude<br>MCP 자동화</div>
+                    <div class="idx-sub" style="color:#6d28d9">자연어 명령으로<br>수문분석 자동화</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#7c3aed">MCP</span>
+                        <span class="idx-tag" style="color:#7c3aed">LLM</span>
+                    </div>
+                </div>
+                <!-- 04 -->
+                <div class="idx-card" style="background:#ecfdf5;border:1.5px solid #a7f3d0">
+                    <div class="idx-num">04</div>
+                    <div class="idx-title" style="color:#065f46">단백질체 분석<br>이미지 전처리</div>
+                    <div class="idx-sub" style="color:#047857">조건부 단백질 선별<br>ImageJ 전처리</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#065f46">Python</span>
+                        <span class="idx-tag" style="color:#065f46">ImageJ</span>
+                    </div>
+                </div>
+                <!-- 05 -->
+                <div class="idx-card" style="background:#fffbeb;border:1.5px solid #fde68a">
+                    <div class="idx-num">05</div>
+                    <div class="idx-title" style="color:#b45309">CAN BUS<br>경량 암호화</div>
+                    <div class="idx-sub" style="color:#92400e">AES 88% 단축<br>KCI·SCOPUS 게재</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#b45309">제1저자</span>
+                        <span class="idx-tag" style="color:#b45309">Java</span>
+                    </div>
+                </div>
+                <!-- 06 -->
+                <div class="idx-card" style="background:#eff6ff;border:1.5px solid #93c5fd">
+                    <div class="idx-num">06</div>
+                    <div class="idx-title" style="color:#0369a1">블록체인 DID<br>탈중앙화 인증</div>
+                    <div class="idx-sub" style="color:#075985">자기주권 신원<br>선택적 정보 공개</div>
+                    <div class="idx-tags">
+                        <span class="idx-tag" style="color:#0369a1">Blockchain</span>
+                        <span class="idx-tag" style="color:#0369a1">DID</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="idx-bottom">
+            <div class="idx-stats">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P1 · When&Where ══════════ -->
+    <div class="pg c1">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">01 / 06 · When&Where</span><span class="ph-name">인지원 · Portfolio</span>
+        </div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-title">When&Where<br>감정분석 기반 장소 추천</div>
+                <div class="proj-sub">K-Means 군집화 장소 추천 → 20만 리뷰 크롤링 → 맛·분위기·가격·서비스 4축 감정 점수화 → 매장 추천. CPU 병렬처리로 처리 속도
+                    50% 단축.
+                </div>
+                <div class="badges">
+                    <span class="bd bd-d">NLP</span><span class="bd bd-d">K-Means</span><span class="bd bd-d">팀장</span>
+                    <span class="bd bd-d">Python</span><span class="bd bd-d">KoNLPy</span><span
+                        class="bd bd-d">multiprocessing</span>
+                </div>
+            </div>
+            <div class="stats">
+
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <!-- 파이프라인 -->
+            <div class="card">
+                <div class="ct">데이터 파이프라인</div>
+                <div class="flow">
+                    <div class="fb" style="background:#ffffff;border-color:#16a34a;color:#15803d">📍 K-Means 장소 선택</div>
+                    <div class="fa">→</div>
+                    <div class="fb" style="background:#ffffff;border-color:#16a34a;color:#15803d">🕸 크롤링</div>
+                    <div class="fa">→</div>
+                    <div class="fb" style="background:#ffffff;border-color:#16a34a;color:#15803d">✂ 전처리</div>
+                    <div class="fa">→</div>
+                    <div class="fb" style="background:#ffffff;border-color:#16a34a;color:#15803d">🧠 NLP</div>
+                    <div class="fa">→</div>
+                    <div class="fb" style="background:#ffffff;border-color:#16a34a;color:#15803d">📊 감정 점수화</div>
+                    <div class="fa">→</div>
+                    <div class="fb" style="background:#16a34a;border-color:#16a34a;color:#fff">🏬 K-Means 추천</div>
+                </div>
+            </div>
+
+            <div class="r2">
+                <!-- NLP 처리 흐름 예시 -->
+                <div class="card">
+                    <div class="ct">자연어 처리 흐름 예시</div>
+
+                    <!-- STEP 1: 원문 -->
+                    <div style="margin-bottom:8px">
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:4px">
+                            ① 원문 리뷰</div>
+                        <div
+                            style="background:#ffffff;border:1.5px solid #15803d;border-radius:6px;padding:8px 10px;font-size:11px;color:#0a3018;line-height:1.6">
+                            "오늘 눈이 와서 그런지 창밖에서 테라스 대나무 구경하는데 더 이뻐보이더라구요 ☺️☺️"
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: 형태소 분석 -->
+                    <div style="margin-bottom:8px">
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:4px">
+                            ② 형태소 분석 (KoNLPy)</div>
+                        <div
+                            style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:4px">
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">오늘/NNG</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">눈/NNG</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#fef9c3;color:#713f12;padding:2px 6px;border-radius:3px">와서/VV</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">창밖/NNG</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">테라스/NNG</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">대나무/NNG</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:3px;border:1px solid #bbf7d0">이뻐보이다/VA</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#fee2e2;color:#991b1b;padding:2px 6px;border-radius:3px">그런지/불용어</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#fee2e2;color:#991b1b;padding:2px 6px;border-radius:3px">더라구요/불용어</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: 불용어 제거 후 -->
+                    <div style="margin-bottom:8px">
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:4px">
+                            ③ 불용어 제거 → 핵심 토큰</div>
+                        <div
+                            style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:4px">
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">테라스</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">대나무</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#e5e7eb;color:#374151;padding:2px 6px;border-radius:3px">창밖</span>
+                            <span
+                                style="font-family:'Normal',monospace;font-size:9px;background:#16a34a;color:#ffffff;padding:2px 6px;border-radius:3px;border:1px solid #bbf7d0;font-weight:600">이뻐보이다
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: 감정 점수 -->
+                    <div>
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:4px">
+                            ④ 감정 점수화 → 카테고리 분류</div>
+                        <div style="display:flex;gap:5px;flex-wrap:wrap">
+                            <div
+                                style="background:#dcfce7;border:1.5px solid #16a34a;border-radius:6px;padding:6px 10px;text-align:center">
+                                <div style="font-size:11px;font-weight:700;color:#15803d">분위기</div>
+                                <div
+                                    style="font-family:'Normal',monospace;font-size:10px;color:#16a34a;font-weight:600">
+                                    +0.88</div>
+                            </div>
+                            <div
+                                style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:6px 10px;text-align:center">
+                                <div style="font-size:11px;font-weight:700;color:#15803d">맛</div>
+                                <div style="font-family:'Normal',monospace;font-size:10px;color:#9ca3af">0.00</div>
+                            </div>
+                            <div
+                                style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:6px 10px;text-align:center">
+                                <div style="font-size:11px;font-weight:700;color:#15803d">가격</div>
+                                <div style="font-family:'Normal',monospace;font-size:10px;color:#9ca3af">0.00</div>
+                            </div>
+                            <div
+                                style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:6px 10px;text-align:center">
+                                <div style="font-size:11px;font-weight:700;color:#15803d">서비스</div>
+                                <div style="font-family:'Normal',monospace;font-size:10px;color:#9ca3af">0.00</div>
+                            </div>
+                            <div
+                                style="background:#16a34a;border-radius:6px;padding:6px 10px;text-align:center;display:flex;align-items:center">
+                                <div style="font-size:10px;color:#fff;font-weight:600">→ 분위기 좋은 장소 추천</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 키워드 추출 → 매장 정보 -->
+                <div class="card">
+                    <div class="ct">키워드 추출 → 매장 태그 프로파일</div>
+                    <div style="margin-bottom:10px">
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:6px">
+                            리뷰 → 키워드 추출</div>
+                        <div
+                            style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:11px;color:#4444;line-height:1.7;margin-bottom:8px">
+                            "오늘 <strong style="color:#15803d">눈</strong>이 와서 그런지 창밖에서 <strong style="color:#15803d">테라스
+                                대나무</strong> 구경하는데 더 <strong style="color:#15803d">이뻐보이더라구요</strong>"
+                        </div>
+                        <div style="text-align:center;font-size:11px;color:#444444;margin-bottom:6px">↓ 명사·형용사 추출</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px">
+                            <span
+                                style="font-size:10px;font-weight:600;color:#15803d;background:#dcfce7;border:1.5px solid #16a34a;padding:3px 8px;border-radius:20px">#테라스</span>
+                            <span
+                                style="font-size:10px;font-weight:600;color:#15803d;background:#dcfce7;border:1.5px solid #16a34a;padding:3px 8px;border-radius:20px">#대나무</span>
+                            <span
+                                style="font-size:10px;font-weight:600;color:#15803d;background:#dcfce7;border:1.5px solid #16a34a;padding:3px 8px;border-radius:20px">#창밖뷰</span>
+                            <span
+                                style="font-size:10px;font-weight:600;color:#059669;background:#ffffff;border:1px solid #bbf7d0;padding:3px 8px;border-radius:20px">#분위기맛집</span>
+                            <span
+                                style="font-size:10px;font-weight:600;color:#059669;background:#ffffff;border:1px solid #bbf7d0;padding:3px 8px;border-radius:20px">#뷰맛집</span>
+                            <span
+                                style="font-size:10px;font-weight:600;color:#6b7280;background:#ffffff;border:1px solid #e5e7eb;padding:3px 8px;border-radius:20px">#겨울감성</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div
+                            style="font-family:'Normal',monospace;font-size:10px;color:#444444;letter-spacing:0.12em;margin-bottom:6px">
+                            매장 태그 프로파일 (누적)</div>
+                        <div style="background:#fff;border:1.5px solid #16a34a;border-radius:8px;padding:10px 12px">
+                            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                                <div
+                                    style="width:28px;height:28px;background:#16a34a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px">
+                                    🏪</div>
+                                <div>
+                                    <div style="font-size:10px;font-weight:700;color:#111">어느 카페</div>
+                                    <div style="font-size:8px;color:#444444;font-family:'Normal',monospace">리뷰 기반 자동 태그
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+                                <span
+                                    style="font-size:9px;background:#16a34a;color:#fff;padding:2px 7px;border-radius:20px;font-weight:600">#테라스
+                                    (42)</span>
+                                <span
+                                    style="font-size:9px;background:#16a34a;color:#fff;padding:2px 7px;border-radius:20px;font-weight:600">#뷰맛집
+                                    (38)</span>
+                                <span
+                                    style="font-size:9px;background:#50ab71;color:#fff;padding:2px 7px;border-radius:20px">#분위기맛집
+                                    (31)</span>
+                                <span
+                                    style="font-size:9px;background:#50ab71;color:#fff;padding:2px 7px;border-radius:20px">#대나무
+                                    (19)</span>
+                                <span
+                                    style="font-size:9px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 7px;border-radius:20px">#겨울감성
+                                    (12)</span>
+                                <span
+                                    style="font-size:9px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 7px;border-radius:20px">#창밖뷰
+                                    (9)</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:6px">
+                                <div style="font-size:8px;color:#888;width:32px;flex-shrink:0">분위기</div>
+                                <div style="flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden">
+                                    <div style="width:88%;height:100%;background:#16a34a;border-radius:4px"></div>
+                                </div>
+                                <div style="font-family:'Normal',monospace;font-size:8px;color:#16a34a;font-weight:600">
+                                    4.8</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 감정 점수 분포 + 처리 속도 -->
+            <div class="r2">
+                <div class="card">
+                    <div class="ct">감정 점수 분포</div>
+                    <div class="br">
+                        <div class="bl">맛</div>
+                        <div class="bt">
+                            <div class="bf" style="width:88%;background:#16a34a">4.8</div>
+                        </div>
+                    </div>
+                    <div class="br">
+                        <div class="bl">서비스</div>
+                        <div class="bt">
+                            <div class="bf" style="width:82%;background:#16a34a">4.5</div>
+                        </div>
+                    </div>
+                    <div class="br">
+                        <div class="bl">분위기</div>
+                        <div class="bt">
+                            <div class="bf" style="width:72%;background:#16a34a">3.9</div>
+                        </div>
+                    </div>
+                    <div class="br">
+                        <div class="bl">가격</div>
+                        <div class="bt">
+                            <div class="bf" style="width:58%;background:#16a34a">3.2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">처리 시간 비교</div>
+                    <div class="br">
+                        <div class="bl" style="color:#aaa">기존</div>
+                        <div class="bt">
+                            <div class="bf" style="width:100%;background:#d1d5db;color:#555">순차 처리 (기준)</div>
+                        </div>
+                    </div>
+                    <div class="br">
+                        <div class="bl">병렬</div>
+                        <div class="bt">
+                            <div class="bf" style="width:50%;background:#16a34a">50% 단축</div>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:10px;padding:8px;background:#f0fdf4;border-radius:6px;font-size:10px;color:#15803d;line-height:1.6">
+                        매장당 <strong>500개+</strong> 리뷰 × 수천 매장<br>→ CPU 병렬처리로 처리 시간 50% 단축
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card">
+                    <div class="ct">핵심 도전</div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="sd" style="background:#dcfce7;color:#16a34a">1</div>
+                            <div>
+                                <div class="st-t">크롤링 병목</div>
+                                <div class="st-d">매장당 500개+ → 멀티프로세싱 병렬처리</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#dcfce7;color:#16a34a">2</div>
+                            <div>
+                                <div class="st-t">혼재 감정</div>
+                                <div class="st-d">한 리뷰에 여러 감정 → 분류 로직 최적화</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#dcfce7;color:#16a34a">3</div>
+                            <div>
+                                <div class="st-t">위치 정확도</div>
+                                <div class="st-d">유클리드 거리 K-Means → 오차 10m 이내</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">역할</div>
+                    <div class="ir">
+                        <div class="ik">팀장</div>
+                        <div class="iv">일정 조율 · K-Means 도입 제안</div>
+                    </div>
+                    <div class="ir">
+                        <div class="ik">담당</div>
+                        <div class="iv">감정분석 추천 기능 전담 개발</div>
+                    </div>
+                    <div class="ir">
+                        <div class="ik">기간</div>
+                        <div class="iv">2023.09 — 2024.03 · 7개월</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">성과</div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">처리속도 50% 단축</div>
+                            <div class="ri-d">멀티프로세싱 병렬처리 적용</div>
+                        </div>
+                    </div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">위치 오차 10m 이내</div>
+                            <div class="ri-d">추천 정확도 우수 평가</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">Python</span><span class="tech">KoNLPy</span><span
+                    class="tech">scikit-learn</span><span class="tech">multiprocessing</span></div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P2 · Graph RAG ══════════ -->
+    <div class="pg c2">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">02 / 06 · Graph RAG Pipeline</span><span class="ph-name">인지원 ·
+                Portfolio</span></div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-label">Graph RAG · Knowledge Graph · K-water 인턴 PoC · 진행 중</div>
+                <div class="proj-title">기술진단 사례 지식화<br>Graph RAG 기반 AI 체계</div>
+                <div class="proj-sub">비정형 사례 문서를 지식 그래프로 구조화. 문서 간 관계를 엣지로 연결해 맥락 기반 복합 질의 응답 가능한 AI 지식 검색 체계 구축 중.
+                </div>
+                <div class="badges">
+                    <span class="bd bd-d">Graph RAG</span><span class="bd bd-d">Knowledge Graph</span>
+                    <span class="bd bd-l">Python</span><span class="bd bd-l">Graph DB</span><span
+                        class="bd bd-l">LLM</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="sv">Graph</div>
+                    <div class="sl">RAG 방식</div>
+                </div>
+                <div>
+                    <div class="sv">PoC→</div>
+                    <div class="sl">운영환경 확장</div>
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <!-- Naive vs Graph RAG 비교 -->
+            <div class="card">
+                <div class="ct">Naive RAG vs Graph RAG</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px">
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#9ca3af;letter-spacing:0.12em;margin-bottom:8px">
+                            NAIVE RAG — 한계</div>
+                        <svg viewBox="0 0 300 72" width="100%" style="display:block">
+                            <defs>
+                                <marker id="a1" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                    <path d="M0,0 L5,2.5 L0,5Z" fill="#d1d5db" />
+                                </marker>
+                            </defs>
+                            <rect x="4" y="16" width="70" height="40" rx="6" fill="#f3f4f6" stroke="#d1d5db"
+                                stroke-width="1.5" />
+                            <text x="39" y="33" text-anchor="middle" font-size="8" fill="#9ca3af"
+                                font-family="monospace">📄 문서</text>
+                            <text x="39" y="46" text-anchor="middle" font-size="7" fill="#d1d5db"
+                                font-family="monospace">개별 청킹</text>
+                            <line x1="77" y1="36" x2="90" y2="36" stroke="#d1d5db" stroke-width="1.5"
+                                marker-end="url(#a1)" />
+                            <rect x="93" y="16" width="70" height="40" rx="6" fill="#f3f4f6" stroke="#d1d5db"
+                                stroke-width="1.5" />
+                            <text x="128" y="33" text-anchor="middle" font-size="8" fill="#9ca3af"
+                                font-family="monospace">🔢 임베딩</text>
+                            <text x="128" y="46" text-anchor="middle" font-size="7" fill="#d1d5db"
+                                font-family="monospace">벡터 저장</text>
+                            <line x1="166" y1="36" x2="178" y2="36" stroke="#d1d5db" stroke-width="1.5"
+                                marker-end="url(#a1)" />
+                            <rect x="181" y="16" width="80" height="40" rx="6" fill="#fee2e2" stroke="#fca5a5"
+                                stroke-width="1.5" />
+                            <text x="221" y="33" text-anchor="middle" font-size="8" fill="#b91c1c"
+                                font-family="monospace">🔍 유사도</text>
+                            <text x="221" y="46" text-anchor="middle" font-size="7" fill="#ef4444"
+                                font-family="monospace">관계 무시 ✗</text>
+                        </svg>
+                    </div>
+                    <div style="background:#eff6ff;border:1.5px solid #1d4ed8;border-radius:8px;padding:12px">
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#1d4ed8;letter-spacing:0.12em;margin-bottom:8px">
+                            GRAPH RAG — 채택</div>
+                        <svg viewBox="0 0 300 72" width="100%" style="display:block">
+                            <defs>
+                                <marker id="a2" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                    <path d="M0,0 L5,2.5 L0,5Z" fill="#1d4ed8" />
+                                </marker>
+                            </defs>
+                            <rect x="4" y="16" width="70" height="40" rx="6" fill="#dbeafe" stroke="#1d4ed8"
+                                stroke-width="1.5" />
+                            <text x="39" y="33" text-anchor="middle" font-size="8" fill="#1d4ed8"
+                                font-family="monospace">📄 문서</text>
+                            <text x="39" y="46" text-anchor="middle" font-size="7" fill="#3b82f6"
+                                font-family="monospace">엔티티 추출</text>
+                            <line x1="77" y1="36" x2="90" y2="36" stroke="#1d4ed8" stroke-width="1.5"
+                                marker-end="url(#a2)" />
+                            <!-- Graph -->
+                            <circle cx="118" cy="28" r="9" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5" />
+                            <circle cx="136" cy="46" r="7" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5" />
+                            <circle cx="102" cy="48" r="7" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5" />
+                            <line x1="118" y1="37" x2="136" y2="40" stroke="#1d4ed8" stroke-width="1" />
+                            <line x1="118" y1="37" x2="102" y2="42" stroke="#1d4ed8" stroke-width="1" />
+                            <line x1="109" y1="48" x2="129" y2="47" stroke="#1d4ed8" stroke-width="1" />
+                            <text x="120" y="66" text-anchor="middle" font-size="7" fill="#1d4ed8"
+                                font-family="monospace">지식 그래프</text>
+                            <line x1="148" y1="36" x2="161" y2="36" stroke="#1d4ed8" stroke-width="1.5"
+                                marker-end="url(#a2)" />
+                            <rect x="164" y="16" width="90" height="40" rx="6" fill="#1d4ed8" stroke="#1d4ed8"
+                                stroke-width="1.5" />
+                            <text x="209" y="33" text-anchor="middle" font-size="8" fill="#fff"
+                                font-family="monospace">🔍 관계 탐색</text>
+                            <text x="209" y="46" text-anchor="middle" font-size="7" fill="#bfdbfe"
+                                font-family="monospace">맥락 이해 ✓</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r2">
+                <div class="card">
+                    <div class="ct">파이프라인</div>
+                    <div style="display:flex;flex-direction:column;gap:4px">
+                        <div style="display:flex;align-items:center;gap:6px">
+                            <div class="fb"
+                                style="background:#dbeafe;border-color:#1d4ed8;color:#1d4ed8;min-width:140px">📄 문서
+                                수집·전처리</div>
+                        </div>
+                        <div style="padding-left:12px;font-size:10px;color:#bbb">↓</div>
+                        <div style="display:flex;align-items:center;gap:6px">
+                            <div class="fb"
+                                style="background:#dbeafe;border-color:#1d4ed8;color:#1d4ed8;min-width:140px">🏷 엔티티·관계
+                                추출</div>
+                        </div>
+                        <div style="padding-left:12px;font-size:10px;color:#bbb">↓</div>
+                        <div style="display:flex;align-items:center;gap:6px">
+                            <div class="fb"
+                                style="background:#dbeafe;border-color:#1d4ed8;color:#1d4ed8;min-width:140px">🕸 지식 그래프
+                                구축</div>
+                        </div>
+                        <div style="padding-left:12px;font-size:10px;color:#bbb">↓</div>
+                        <div style="display:flex;align-items:center;gap:6px">
+                            <div class="fb"
+                                style="background:#dbeafe;border-color:#1d4ed8;color:#1d4ed8;min-width:140px">🔍 그래프 탐색
+                                + 벡터</div>
+                        </div>
+                        <div style="padding-left:12px;font-size:10px;color:#bbb">↓</div>
+                        <div style="display:flex;align-items:center;gap:6px">
+                            <div class="fb" style="background:#1d4ed8;border-color:#1d4ed8;color:#fff;min-width:140px">
+                                💬 답변 생성</div>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:10px;padding:8px;background:#eff6ff;border-radius:6px;border:1px solid #bfdbfe">
+                        <div style="font-size:8px;font-family:'Normal',monospace;color:#1d4ed8;margin-bottom:3px">QUERY
+                        </div>
+                        <div style="font-size:9px;color:#333">"이 유형 문제, 과거에 어떻게 해결했나요?"</div>
+                        <div style="font-size:9px;color:#1d4ed8;margin-top:3px">→ 관계 추적 + 유사 사례 3건 + 요약</div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    <div class="card">
+                        <div class="ct">시스템 설계</div>
+                        <div class="ir">
+                            <div class="ik">INPUT</div>
+                            <div class="iv">자연어 질의 · 비정형 사례 문서</div>
+                        </div>
+                        <div class="ir">
+                            <div class="ik">OUTPUT</div>
+                            <div class="iv">관계 기반 사례 + AI 요약</div>
+                        </div>
+                        <div class="ir">
+                            <div class="ik">역할</div>
+                            <div class="iv">파이프라인 전체 단독 설계·구현</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="ct">Graph RAG 선택 이유</div>
+                        <div class="steps">
+                            <div class="step">
+                                <div class="sd" style="background:#dbeafe;color:#1d4ed8">✓</div>
+                                <div>
+                                    <div class="st-t">맥락 기반 검색</div>
+                                    <div class="st-d">원인→해결→유사사례 관계 구조화</div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="sd" style="background:#dbeafe;color:#1d4ed8">✓</div>
+                                <div>
+                                    <div class="st-t">복합 질의 처리</div>
+                                    <div class="st-d">단순 유사도 검색 한계 극복</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card">
+                    <div class="ct">기대 성과</div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">지식 격차 해소</div>
+                            <div class="ri-d">AI 공통 지식 그래프 기반</div>
+                        </div>
+                    </div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">탐색 효율 향상</div>
+                            <div class="ri-d">수작업 검색 → 자동화</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column:span 2">
+                    <div class="ct">기술 스택</div>
+                    <div class="techs">
+                        <span class="tech">Python</span><span class="tech">Graph RAG</span><span class="tech">Graph
+                            DB</span>
+                        <span class="tech">LLM</span><span class="tech">Entity Extraction</span><span
+                            class="tech">Vector DB</span>
+                        <span class="tech">K-water 인턴</span><span class="tech">PoC 진행 중</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">Graph RAG</span><span class="tech">Knowledge Graph</span><span
+                    class="tech">K-water</span></div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P3 · HEC-RAS MCP ══════════ -->
+    <div class="pg c3">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">03 / 06 · HEC-RAS × Claude MCP</span><span class="ph-name">인지원 ·
+                Portfolio</span></div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-label">MCP · LLM Integration · K-water 인턴 · 개인</div>
+                <div class="proj-title">HEC-RAS × Claude<br>자연어 수문분석 자동화</div>
+                <div class="proj-sub">API 미지원 환경에서 Claude와 HEC-RAS를 연결하는 MCP 직접 설계·구현. 자연어 명령 하나로 유량 조회·입력·분석·결과 테이블까지
+                    자동 처리.</div>
+                <div class="badges">
+                    <span class="bd bd-d">MCP</span><span class="bd bd-d">LLM 연동</span><span class="bd bd-d">자기주도</span>
+                    <span class="bd bd-l">Python</span><span class="bd bd-l">Claude API</span><span
+                        class="bd bd-l">HEC-RAS</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="sv">API없이</div>
+                    <div class="sl">연동 성공</div>
+                </div>
+                <div>
+                    <div class="sv">1개</div>
+                    <div class="sl">명령으로 전체</div>
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <!-- 아키텍처 SVG -->
+            <div class="card">
+                <div class="ct">시스템 아키텍처</div>
+                <svg viewBox="0 0 680 100" width="100%" style="display:block">
+                    <defs>
+                        <marker id="b1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <path d="M0,0 L6,3 L0,6Z" fill="#7c3aed" />
+                        </marker>
+                        <marker id="b2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
+                            <path d="M0,0 L6,3 L0,6Z" fill="#7c3aed" opacity="0.35" />
+                        </marker>
+                    </defs>
+                    <!-- 사용자 -->
+                    <rect x="4" y="30" width="110" height="40" rx="8" fill="#f5f3ff" stroke="#7c3aed"
+                        stroke-width="1.5" />
+                    <text x="59" y="48" text-anchor="middle" font-size="10" fill="#7c3aed" font-family="monospace"
+                        font-weight="500">👤 사용자</text>
+                    <text x="59" y="62" text-anchor="middle" font-size="8" fill="#9ca3af" font-family="monospace">자연어
+                        명령</text>
+                    <line x1="117" y1="50" x2="132" y2="50" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#b1)" />
+                    <!-- Claude -->
+                    <rect x="136" y="22" width="120" height="56" rx="8" fill="#f5f3ff" stroke="#7c3aed"
+                        stroke-width="1.5" />
+                    <text x="196" y="46" text-anchor="middle" font-size="14">🤖</text>
+                    <text x="196" y="61" text-anchor="middle" font-size="10" fill="#7c3aed" font-family="monospace"
+                        font-weight="500">Claude LLM</text>
+                    <text x="196" y="72" text-anchor="middle" font-size="8" fill="#9ca3af" font-family="monospace">명령
+                        해석</text>
+                    <!-- arrows -->
+                    <line x1="259" y1="48" x2="274" y2="48" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#b1)" />
+                    <line x1="274" y1="60" x2="259" y2="60" stroke="#7c3aed" stroke-width="1" opacity="0.35"
+                        marker-end="url(#b2)" />
+                    <!-- MCP -->
+                    <rect x="278" y="10" width="160" height="80" rx="10" fill="#7c3aed" stroke="#7c3aed"
+                        stroke-width="2" />
+                    <text x="358" y="36" text-anchor="middle" font-size="12" fill="#fff" font-family="monospace"
+                        font-weight="600">⚙ MCP</text>
+                    <text x="358" y="50" text-anchor="middle" font-size="8" fill="#c4b5fd" font-family="monospace">직접
+                        설계·구현</text>
+                    <rect x="290" y="56" width="64" height="14" rx="3" fill="rgba(255,255,255,0.15)" />
+                    <text x="322" y="66" text-anchor="middle" font-size="7" fill="#e9d5ff"
+                        font-family="monospace">query_flow</text>
+                    <rect x="362" y="56" width="66" height="14" rx="3" fill="rgba(255,255,255,0.15)" />
+                    <text x="395" y="66" text-anchor="middle" font-size="7" fill="#e9d5ff"
+                        font-family="monospace">run_analysis</text>
+                    <!-- arrows -->
+                    <line x1="441" y1="48" x2="456" y2="48" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#b1)" />
+                    <line x1="456" y1="60" x2="441" y2="60" stroke="#7c3aed" stroke-width="1" opacity="0.35"
+                        marker-end="url(#b2)" />
+                    <!-- HEC-RAS -->
+                    <rect x="460" y="22" width="130" height="56" rx="8" fill="#f5f3ff" stroke="#7c3aed"
+                        stroke-width="1.5" />
+                    <text x="525" y="46" text-anchor="middle" font-size="14">🌊</text>
+                    <text x="525" y="61" text-anchor="middle" font-size="10" fill="#7c3aed" font-family="monospace"
+                        font-weight="500">HEC-RAS</text>
+                    <text x="525" y="72" text-anchor="middle" font-size="8" fill="#9ca3af" font-family="monospace">수문분석
+                        SW</text>
+                    <!-- bottom bar -->
+                    <rect x="4" y="94" width="620" height="4" rx="2" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1" />
+                    <text x="314" y="99" text-anchor="middle" font-size="7" fill="#7c3aed" font-family="monospace">"유량
+                        데이터 조회 후 수치 분석 결과 테이블로 보여줘" → 전체 자동 처리 완료 ✓</text>
+                </svg>
+            </div>
+
+            <div class="r2">
+                <div class="card">
+                    <div class="ct">구현 과정</div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="sd" style="background:#f5f3ff;color:#7c3aed">1</div>
+                            <div>
+                                <div class="st-t">트렌드 포착</div>
+                                <div class="st-d">OpenClaw 출시 → Claude-HEC-RAS 연결 가능성 발견</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#f5f3ff;color:#7c3aed">2</div>
+                            <div>
+                                <div class="st-t">제약 분석</div>
+                                <div class="st-d">API 미지원 → 컨트롤러 기반 우회 연동 설계</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#f5f3ff;color:#7c3aed">3</div>
+                            <div>
+                                <div class="st-t">명령어 설계</div>
+                                <div class="st-d">사용자 명령 경우의 수 정리 → 우선순위 기반 구현</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#7c3aed;color:#fff">4</div>
+                            <div>
+                                <div class="st-t">MCP 완성</div>
+                                <div class="st-d">퇴근 후 3시간씩 독학 · 단일 명령 자동화 달성</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">MCP 구현 기능</div>
+                    <div style="display:flex;flex-direction:column;gap:5px">
+                        <div
+                            style="display:flex;gap:7px;align-items:center;padding:6px 8px;background:#f5f3ff;border-radius:5px;border:1px solid #c4b5fd">
+                            <span>🔍</span>
+                            <div>
+                                <div style="font-size:9px;font-weight:600;color:#7c3aed;font-family:'Normal',monospace">
+                                    query_flow_data</div>
+                                <div style="font-size:8px;color:#888">유량 데이터 조회</div>
+                            </div>
+                        </div>
+                        <div
+                            style="display:flex;gap:7px;align-items:center;padding:6px 8px;background:#f5f3ff;border-radius:5px;border:1px solid #c4b5fd">
+                            <span>✏️</span>
+                            <div>
+                                <div style="font-size:9px;font-weight:600;color:#7c3aed;font-family:'Normal',monospace">
+                                    input_parameters</div>
+                                <div style="font-size:8px;color:#888">분석 파라미터 입력</div>
+                            </div>
+                        </div>
+                        <div
+                            style="display:flex;gap:7px;align-items:center;padding:6px 8px;background:#f5f3ff;border-radius:5px;border:1px solid #c4b5fd">
+                            <span>📊</span>
+                            <div>
+                                <div style="font-size:9px;font-weight:600;color:#7c3aed;font-family:'Normal',monospace">
+                                    run_analysis</div>
+                                <div style="font-size:8px;color:#888">수치 분석 실행</div>
+                            </div>
+                        </div>
+                        <div
+                            style="display:flex;gap:7px;align-items:center;padding:6px 8px;background:#7c3aed;border-radius:5px">
+                            <span>📋</span>
+                            <div>
+                                <div style="font-size:9px;font-weight:600;color:#fff;font-family:'Normal',monospace">
+                                    show_result_table</div>
+                                <div style="font-size:8px;color:#c4b5fd">결과 테이블 표시</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card">
+                    <div class="ct">핵심 역량</div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="sd" style="background:#f5f3ff;color:#7c3aed">🎯</div>
+                            <div>
+                                <div class="st-t">트렌드 감지</div>
+                                <div class="st-d">신기술 즉시 활용 가능성 포착</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#f5f3ff;color:#7c3aed">🔧</div>
+                            <div>
+                                <div class="st-t">제약 극복</div>
+                                <div class="st-d">API 없이 이종 기술 연결</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column:span 2">
+                    <div class="ct">성과</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                        <div class="ri" style="margin-bottom:0">
+                            <div>
+                                <div class="ri-t">API 없이 LLM-SW 연동</div>
+                                <div class="ri-d">컨트롤러 기반 우회 설계</div>
+                            </div>
+                        </div>
+                        <div class="ri" style="margin-bottom:0">
+                            <div>
+                                <div class="ri-t">자연어 단일 명령 자동화</div>
+                                <div class="ri-d">수작업 다단계 → 1개 명령</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">Python</span><span class="tech">MCP</span><span class="tech">Claude
+                    API</span><span class="tech">HEC-RAS</span></div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P4 · 단백질체 ══════════ -->
+    <div class="pg c4">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">04 / 06 · 단백질체 분석 & 이미지 전처리</span><span class="ph-name">인지원 ·
+                Portfolio</span></div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-label">Proteomics · Image Processing · 식물생명공학 연구실</div>
+                <div class="proj-title">조건부 단백질체 분석<br>& 이미지 전처리</div>
+                <div class="proj-sub">A반응 단백질체를 선별하기 위해 대조군과 함께 실험 후 CSV 반복 필터링. 노이즈 이미지를 ImageJ 분석에 적합한 단일 선 형태로 전처리하는
+                    파이프라인 구축.</div>
+                <div class="badges">
+                    <span class="bd bd-d">Proteomics</span><span class="bd bd-d">Image Processing</span>
+                    <span class="bd bd-l">Python</span><span class="bd bd-l">ImageJ</span><span
+                        class="bd bd-l">CSV</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="sv">2개</div>
+                    <div class="sl">파트 수행</div>
+                </div>
+                <div>
+                    <div class="sv">반복</div>
+                    <div class="sl">필터링 선별</div>
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <div class="r2">
+                <!-- PART 1 -->
+                <div class="card">
+                    <div class="ct" style="color:#065f46">PART 1 · 조건부 단백질체 분석</div>
+                    <svg viewBox="0 0 320 118" width="100%" style="display:block;margin-bottom:8px">
+                        <defs>
+                            <marker id="c1" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                <path d="M0,0 L5,2.5 L0,5Z" fill="#065f46" />
+                            </marker>
+                        </defs>
+                        <rect x="4" y="8" width="88" height="32" rx="6" fill="#d1fae5" stroke="#065f46"
+                            stroke-width="1.5" />
+                        <text x="48" y="22" text-anchor="middle" font-size="9" fill="#065f46" font-family="monospace"
+                            font-weight="500">🧬 A반응 단백질체</text>
+                        <text x="48" y="34" text-anchor="middle" font-size="8" fill="#059669"
+                            font-family="monospace">(목표)</text>
+                        <text x="96" y="27" text-anchor="middle" font-size="12" fill="#065f46"
+                            font-weight="700">+</text>
+                        <rect x="100" y="8" width="88" height="32" rx="6" fill="#f0fdf4" stroke="#a7f3d0"
+                            stroke-width="1.5" />
+                        <text x="144" y="22" text-anchor="middle" font-size="9" fill="#065f46" font-family="monospace"
+                            font-weight="500">🔬 대조군 단백질체</text>
+                        <text x="144" y="34" text-anchor="middle" font-size="8" fill="#9ca3af"
+                            font-family="monospace">(구분용)</text>
+                        <line x1="144" y1="42" x2="144" y2="52" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c1)" />
+                        <rect x="96" y="54" width="96" height="26" rx="6" fill="#d1fae5" stroke="#065f46"
+                            stroke-width="1.5" />
+                        <text x="144" y="70" text-anchor="middle" font-size="9" fill="#065f46" font-family="monospace">⚙
+                            장비 실험</text>
+                        <line x1="144" y1="82" x2="144" y2="92" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c1)" />
+                        <rect x="96" y="94" width="96" height="20" rx="4" fill="#ecfdf5" stroke="#065f46"
+                            stroke-width="1" />
+                        <text x="144" y="107" text-anchor="middle" font-size="8" fill="#065f46"
+                            font-family="monospace">📄 CSV 출력</text>
+                        <line x1="195" y1="104" x2="208" y2="104" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c1)" />
+                        <rect x="210" y="92" width="102" height="24" rx="6" fill="#065f46" />
+                        <text x="261" y="105" text-anchor="middle" font-size="8" fill="#fff" font-family="monospace">🔽
+                            반복 필터링</text>
+                        <text x="261" y="115" text-anchor="middle" font-size="7" fill="#6ee7b7"
+                            font-family="monospace">→ A반응만 추출 ✓</text>
+                    </svg>
+                    <div
+                        style="font-size:9px;color:#555;line-height:1.5;background:#f0fdf4;border-radius:5px;padding:7px">
+                        대조군과 함께 실험 → CSV 저장 → Python으로 조건 적용하며 <strong>거르고 걸러서</strong> A반응 단백질체만 선별
+                    </div>
+                </div>
+
+                <!-- PART 2 -->
+                <div class="card">
+                    <div class="ct" style="color:#065f46">PART 2 · 이미지 전처리</div>
+                    <svg viewBox="0 0 320 118" width="100%" style="display:block;margin-bottom:8px">
+                        <defs>
+                            <marker id="c2" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                <path d="M0,0 L5,2.5 L0,5Z" fill="#065f46" />
+                            </marker>
+                        </defs>
+                        <!-- 노이즈 이미지 -->
+                        <rect x="4" y="16" width="78" height="72" rx="6" fill="#fee2e2" stroke="#ef4444"
+                            stroke-width="1.5" />
+                        <text x="43" y="36" text-anchor="middle" font-size="8" fill="#b91c1c" font-family="monospace">원본
+                            이미지</text>
+                        <line x1="14" y1="52" x2="30" y2="46" stroke="#ef4444" stroke-width="1.5" opacity="0.5" />
+                        <line x1="20" y1="60" x2="42" y2="53" stroke="#ef4444" stroke-width="1.5" opacity="0.5" />
+                        <line x1="30" y1="70" x2="55" y2="58" stroke="#ef4444" stroke-width="1.5" opacity="0.5" />
+                        <line x1="18" y1="75" x2="68" y2="68" stroke="#ef4444" stroke-width="1.5" opacity="0.4" />
+                        <line x1="15" y1="80" x2="50" y2="82" stroke="#ef4444" stroke-width="1" opacity="0.3" />
+                        <text x="43" y="98" text-anchor="middle" font-size="7" fill="#ef4444"
+                            font-family="monospace">노이즈 多</text>
+                        <!-- 화살표 -->
+                        <line x1="85" y1="52" x2="100" y2="52" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c2)" />
+                        <!-- 전처리 -->
+                        <rect x="103" y="30" width="88" height="28" rx="6" fill="#d1fae5" stroke="#065f46"
+                            stroke-width="1.5" />
+                        <text x="147" y="47" text-anchor="middle" font-size="9" fill="#065f46"
+                            font-family="monospace">🐍 Python 전처리</text>
+                        <line x1="147" y1="60" x2="147" y2="70" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c2)" />
+                        <rect x="103" y="72" width="88" height="20" rx="4" fill="#ecfdf5" stroke="#065f46"
+                            stroke-width="1" />
+                        <text x="147" y="85" text-anchor="middle" font-size="8" fill="#065f46" font-family="monospace">➖
+                            단일 선 변환</text>
+                        <!-- 화살표 -->
+                        <line x1="194" y1="52" x2="208" y2="52" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c2)" />
+                        <!-- 결과 이미지 -->
+                        <rect x="211" y="16" width="100" height="72" rx="6" fill="#d1fae5" stroke="#065f46"
+                            stroke-width="2" />
+                        <text x="261" y="36" text-anchor="middle" font-size="8" fill="#065f46"
+                            font-family="monospace">정제 이미지</text>
+                        <line x1="222" y1="56" x2="300" y2="56" stroke="#065f46" stroke-width="2.5" />
+                        <text x="261" y="76" text-anchor="middle" font-size="8" fill="#059669"
+                            font-family="monospace">단일 선 ✓</text>
+                        <line x1="261" y1="91" x2="261" y2="101" stroke="#065f46" stroke-width="1.5"
+                            marker-end="url(#c2)" />
+                        <rect x="211" y="103" width="100" height="18" rx="5" fill="#065f46" />
+                        <text x="261" y="115" text-anchor="middle" font-size="8" fill="#fff" font-family="monospace">📊
+                            ImageJ 투입</text>
+                    </svg>
+                    <div
+                        style="font-size:9px;color:#555;line-height:1.5;background:#f0fdf4;border-radius:5px;padding:7px">
+                        노이즈 이미지 → Python 전처리 → <strong>단일 선 형태</strong>로 변환 → ImageJ 분석 투입
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card">
+                    <div class="ct">핵심 도전</div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="sd" style="background:#d1fae5;color:#065f46">!</div>
+                            <div>
+                                <div class="st-t">반복 검증 딜레마</div>
+                                <div class="st-d">정확도↑ → 속도↓ → 단계별 우선순위화로 해소</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#d1fae5;color:#065f46">✓</div>
+                            <div>
+                                <div class="st-t">균형 달성</div>
+                                <div class="st-d">중간 결과물 확보 방식으로 정확도·추진력 동시 확보</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">성과</div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">A반응 단백질체 선별 완료</div>
+                            <div class="ri-d">반복 필터링으로 정확 추출</div>
+                        </div>
+                    </div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">ImageJ 투입 최적화</div>
+                            <div class="ri-d">단일 선 전처리 파이프라인 완성</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">기술 스택</div>
+                    <div class="techs">
+                        <span class="tech">Python</span><span class="tech">ImageJ</span>
+                        <span class="tech">CSV 필터링</span><span class="tech">이미지 전처리</span>
+                        <span class="tech">노이즈 제거</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">식물생명공학 연구실</span><span class="tech">연구 인턴</span></div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P5 · 논문 ══════════ -->
+    <div class="pg c5">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">05 / 06 · 논문 · CAN BUS 경량 암호화</span><span class="ph-name">인지원 ·
+                Portfolio</span></div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-label">학술 논문 · 제1저자 · KCI · SCOPUS 등재 · 2025</div>
+                <div class="proj-title">CAN BUS 통신을 위한<br>경량 암호화 알고리즘 비교</div>
+                <div class="proj-sub">CAN BUS 실시간 환경에서 AES ShiftRows를 짝수·홀수 인덱스 자리교환 방식으로 변형해 보안성을 유지하면서 실행 시간 88% 단축.
+                    한국통신학회 논문지 제1저자 게재.</div>
+                <div class="badges">
+                    <span class="bd bd-d">제1저자</span><span class="bd bd-d">KCI</span><span class="bd bd-d">SCOPUS</span>
+                    <span class="bd bd-l">Java</span><span class="bd bd-l">AES</span><span class="bd bd-l">CAN
+                        BUS</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="sv">88%</div>
+                    <div class="sl">실행 시간 단축</div>
+                </div>
+                <div>
+                    <div class="sv">0.05ms</div>
+                    <div class="sl">최종 연산</div>
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <!-- ShiftRows 비교 -->
+            <div class="card">
+                <div class="ct">핵심 아이디어 — ShiftRows 변형 (논문 그림 재현)</div>
+                <div style="display:grid;grid-template-columns:1fr 56px 1fr;gap:0;align-items:center">
+                    <div>
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#9ca3af;margin-bottom:8px;text-align:center;letter-spacing:0.1em">
+                            그림 3. 초기 라운드 구조</div>
+                        <div
+                            style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;max-width:200px;margin:0 auto">
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                0</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                1</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                2</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                3</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                4</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                5</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                6</div>
+                            <div
+                                style="border:1.5px solid #d1d5db;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                7</div>
+                        </div>
+                        <div
+                            style="text-align:center;font-size:9px;color:#9ca3af;font-family:'Normal',monospace;margin-top:6px">
+                            실행 시간: 0.45ms</div>
+                    </div>
+                    <div style="text-align:center;font-size:28px;color:#b45309">→</div>
+                    <div>
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#b45309;margin-bottom:8px;text-align:center;letter-spacing:0.1em">
+                            그림 4. 라운드 0 구조 (제안)</div>
+                        <div
+                            style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;max-width:200px;margin:0 auto">
+                            <div
+                                style="border:2px solid #b45309;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:700;color:#78350f;background:#fef3c7">
+                                6</div>
+                            <div
+                                style="border:1.5px solid #d97706;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                1</div>
+                            <div
+                                style="border:2px solid #b45309;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:700;color:#78350f;background:#fef3c7">
+                                4</div>
+                            <div
+                                style="border:1.5px solid #d97706;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                3</div>
+                            <div
+                                style="border:2px solid #b45309;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:700;color:#78350f;background:#fef3c7">
+                                2</div>
+                            <div
+                                style="border:1.5px solid #d97706;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                5</div>
+                            <div
+                                style="border:2px solid #b45309;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:700;color:#78350f;background:#fef3c7">
+                                0</div>
+                            <div
+                                style="border:1.5px solid #d97706;border-radius:5px;padding:10px 0;text-align:center;font-family:'Normal',monospace;font-size:16px;font-weight:500;color:#374151;background:#fff">
+                                7</div>
+                        </div>
+                        <div style="display:flex;gap:10px;justify-content:center;margin-top:6px">
+                            <div style="display:flex;align-items:center;gap:3px">
+                                <div
+                                    style="width:9px;height:9px;background:#fef3c7;border:1.5px solid #b45309;border-radius:2px">
+                                </div><span style="font-size:8px;color:#b45309;font-family:'Normal',monospace">짝수
+                                    교환</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:3px">
+                                <div
+                                    style="width:9px;height:9px;background:#fff;border:1.5px solid #d97706;border-radius:2px">
+                                </div><span style="font-size:8px;color:#888;font-family:'Normal',monospace">홀수
+                                    유지</span>
+                            </div>
+                        </div>
+                        <div
+                            style="text-align:center;font-size:9px;color:#b45309;font-family:'Normal',monospace;margin-top:4px;font-weight:700">
+                            0.05ms ↓ 88% 단축</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r2">
+                <div class="card">
+                    <div class="ct">성능 비교</div>
+                    <div class="br">
+                        <div class="bl">기존 AES</div>
+                        <div class="bt">
+                            <div class="bf" style="width:100%;background:#d1d5db;color:#374151">0.45ms</div>
+                        </div>
+                    </div>
+                    <div class="br">
+                        <div class="bl">제안 방식</div>
+                        <div class="bt">
+                            <div class="bf" style="width:12%;background:#b45309">0.05ms</div>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:10px;padding:8px;background:#fffbeb;border-radius:5px;border:1px solid #fbbf24">
+                        <div style="font-size:9px;color:#78350f;font-weight:700;margin-bottom:2px">짝수·홀수 인덱스 자리교환</div>
+                        <div style="font-size:8px;color:#92400e;line-height:1.5">0↔6, 2↔4 교환 · 홀수(1,3,5,7) 유지<br>보안성
+                            유지하며 연산 최소화</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">논문 정보</div>
+                    <div class="ir">
+                        <div class="ik">저자</div>
+                        <div class="iv">인지원, 최승식</div>
+                    </div>
+                    <div class="ir">
+                        <div class="ik">학술지</div>
+                        <div class="iv">J-KICS · Vol.50 No.6 · 2025.06</div>
+                    </div>
+                    <div class="ir">
+                        <div class="ik">등재</div>
+                        <div class="iv">KCI · SCOPUS 국제 등재</div>
+                    </div>
+                    <div class="ir">
+                        <div class="ik">DOI</div>
+                        <div class="iv" style="font-family:'Normal',monospace;font-size:9px">10.7840/kics.2025.50.6.978
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card" style="grid-column:span 2">
+                    <div class="ct">연구 과정</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                        <div class="step">
+                            <div class="sd" style="background:#fffbeb;color:#b45309">1</div>
+                            <div>
+                                <div class="st-t">문제 정의</div>
+                                <div class="st-d">CAN BUS 환경 · ShiftRows 병목 특정</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#fffbeb;color:#b45309">2</div>
+                            <div>
+                                <div class="st-t">알고리즘 설계</div>
+                                <div class="st-d">짝수·홀수 인덱스 교환 방식 고안</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#fffbeb;color:#b45309">3</div>
+                            <div>
+                                <div class="st-t">반복 실험</div>
+                                <div class="st-d">수천 번 실험 · 매일 6:30 출근</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#b45309;color:#fff">4</div>
+                            <div>
+                                <div class="st-t">KCI·SCOPUS 게재</div>
+                                <div class="st-d">88% 단축 · 제1저자 게재</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">기술 스택</div>
+                    <div class="techs">
+                        <span class="tech">Java</span><span class="tech">AES</span>
+                        <span class="tech">CAN BUS</span><span class="tech">ShiftRows</span>
+                        <span class="tech">V2X</span><span class="tech">벤치마킹</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">제1저자</span><span class="tech">KCI</span><span
+                    class="tech">SCOPUS</span></div>
+        </div>
+    </div>
+
+
+    <!-- ══════════ P6 · 블록체인 DID ══════════ -->
+    <div class="pg c6">
+        <div class="stripe"></div>
+        <div class="ph"><span class="ph-num">06 / 06 · 블록체인 DID 인증</span><span class="ph-name">인지원 · Portfolio</span>
+        </div>
+
+        <div class="hero">
+            <div>
+                <div class="proj-label">Blockchain · DID · 탈중앙화 인증 · 팀 프로젝트</div>
+                <div class="proj-title">블록체인 DID 인증<br>탈중앙화 신원 구조 설계</div>
+                <div class="proj-sub">중앙화 방식의 단일 장애점과 개인정보 집중 문제 해결. 사용자가 필요한 정보만 선택적으로 제출할 수 있는 자기주권 신원(SSI) 구조로 보안성과
+                    편의성을 동시에 실현.</div>
+                <div class="badges">
+                    <span class="bd bd-d">Blockchain</span><span class="bd bd-d">DID</span><span
+                        class="bd bd-d">SSI</span>
+                    <span class="bd bd-l">자기주권 신원</span><span class="bd bd-l">선택적 공개</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="sv">Zero</div>
+                    <div class="sl">단일 장애점</div>
+                </div>
+                <div>
+                    <div class="sv">SSI</div>
+                    <div class="sl">자기주권 신원</div>
+                </div>
+            </div>
+        </div>
+        <div class="div"></div>
+
+        <div class="body">
+            <!-- 중앙화 vs DID -->
+            <div class="card">
+                <div class="ct">중앙화 방식 vs DID 탈중앙화 방식</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div style="background:#fff5f5;border:1px solid #fca5a5;border-radius:8px;padding:12px">
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#dc2626;letter-spacing:0.1em;margin-bottom:8px">
+                            기존 중앙화 — 문제</div>
+                        <svg viewBox="0 0 260 95" width="100%" style="display:block">
+                            <defs>
+                                <marker id="d1" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                    <path d="M0,0 L5,2.5 L0,5Z" fill="#dc2626" />
+                                </marker>
+                            </defs>
+                            <rect x="78" y="4" width="104" height="32" rx="7" fill="#fee2e2" stroke="#dc2626"
+                                stroke-width="2" />
+                            <text x="130" y="18" text-anchor="middle" font-size="9" fill="#b91c1c"
+                                font-family="monospace" font-weight="600">🏛 중앙 서버</text>
+                            <text x="130" y="30" text-anchor="middle" font-size="8" fill="#b91c1c"
+                                font-family="monospace">모든 정보 집중</text>
+                            <rect x="4" y="62" width="64" height="24" rx="5" fill="#fef2f2" stroke="#fca5a5"
+                                stroke-width="1" />
+                            <text x="36" y="77" text-anchor="middle" font-size="8" fill="#dc2626"
+                                font-family="monospace">👤 사용자A</text>
+                            <rect x="96" y="62" width="64" height="24" rx="5" fill="#fef2f2" stroke="#fca5a5"
+                                stroke-width="1" />
+                            <text x="128" y="77" text-anchor="middle" font-size="8" fill="#dc2626"
+                                font-family="monospace">👤 사용자B</text>
+                            <rect x="190" y="62" width="64" height="24" rx="5" fill="#fef2f2" stroke="#fca5a5"
+                                stroke-width="1" />
+                            <text x="222" y="77" text-anchor="middle" font-size="8" fill="#dc2626"
+                                font-family="monospace">👤 사용자C</text>
+                            <line x1="36" y1="62" x2="100" y2="38" stroke="#dc2626" stroke-width="1"
+                                marker-end="url(#d1)" />
+                            <line x1="128" y1="62" x2="130" y2="38" stroke="#dc2626" stroke-width="1"
+                                marker-end="url(#d1)" />
+                            <line x1="222" y1="62" x2="162" y2="38" stroke="#dc2626" stroke-width="1"
+                                marker-end="url(#d1)" />
+                            <text x="130" y="94" text-anchor="middle" font-size="7" fill="#dc2626"
+                                font-family="monospace">⚠ 침해 시 전체 노출 (SPOF)</text>
+                        </svg>
+                    </div>
+                    <div style="background:#eff6ff;border:1.5px solid #0369a1;border-radius:8px;padding:12px">
+                        <div
+                            style="font-size:8px;font-family:'Normal',monospace;color:#0369a1;letter-spacing:0.1em;margin-bottom:8px">
+                            DID 탈중앙화 — 해결</div>
+                        <svg viewBox="0 0 260 95" width="100%" style="display:block">
+                            <defs>
+                                <marker id="d2" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+                                    <path d="M0,0 L5,2.5 L0,5Z" fill="#0369a1" />
+                                </marker>
+                            </defs>
+                            <rect x="78" y="4" width="104" height="32" rx="7" fill="#dbeafe" stroke="#0369a1"
+                                stroke-width="2" />
+                            <text x="130" y="18" text-anchor="middle" font-size="9" fill="#0369a1"
+                                font-family="monospace" font-weight="600">⛓ 블록체인</text>
+                            <text x="130" y="30" text-anchor="middle" font-size="8" fill="#0369a1"
+                                font-family="monospace">DID 분산 저장</text>
+                            <rect x="4" y="62" width="64" height="28" rx="5" fill="#eff6ff" stroke="#93c5fd"
+                                stroke-width="1" />
+                            <text x="36" y="74" text-anchor="middle" font-size="8" fill="#0369a1"
+                                font-family="monospace">👤 사용자A</text>
+                            <text x="36" y="85" text-anchor="middle" font-size="7" fill="#60a5fa"
+                                font-family="monospace">선택 공개</text>
+                            <rect x="96" y="62" width="64" height="28" rx="5" fill="#eff6ff" stroke="#93c5fd"
+                                stroke-width="1" />
+                            <text x="128" y="74" text-anchor="middle" font-size="8" fill="#0369a1"
+                                font-family="monospace">👤 사용자B</text>
+                            <text x="128" y="85" text-anchor="middle" font-size="7" fill="#60a5fa"
+                                font-family="monospace">선택 공개</text>
+                            <rect x="190" y="62" width="64" height="28" rx="5" fill="#eff6ff" stroke="#93c5fd"
+                                stroke-width="1" />
+                            <text x="222" y="74" text-anchor="middle" font-size="8" fill="#0369a1"
+                                font-family="monospace">👤 사용자C</text>
+                            <text x="222" y="85" text-anchor="middle" font-size="7" fill="#60a5fa"
+                                font-family="monospace">선택 공개</text>
+                            <line x1="36" y1="62" x2="100" y2="38" stroke="#0369a1" stroke-width="1"
+                                marker-end="url(#d2)" />
+                            <line x1="128" y1="62" x2="130" y2="38" stroke="#0369a1" stroke-width="1"
+                                marker-end="url(#d2)" />
+                            <line x1="222" y1="62" x2="162" y2="38" stroke="#0369a1" stroke-width="1"
+                                marker-end="url(#d2)" />
+                            <text x="130" y="94" text-anchor="middle" font-size="7" fill="#0369a1"
+                                font-family="monospace">✓ 단일 장애점 제거 · SSI 실현</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r2">
+                <div class="card">
+                    <div class="ct">구현 과정</div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="sd" style="background:#eff6ff;color:#0369a1">1</div>
+                            <div>
+                                <div class="st-t">문제 정의</div>
+                                <div class="st-d">중앙화 SPOF · 개인정보 집중 리스크 분석</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#eff6ff;color:#0369a1">2</div>
+                            <div>
+                                <div class="st-t">DID 구조 설계</div>
+                                <div class="st-d">블록체인 분산 저장 · DID Document · VC</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#eff6ff;color:#0369a1">3</div>
+                            <div>
+                                <div class="st-t">선택적 공개 구현</div>
+                                <div class="st-d">필요한 항목만 제출 가능한 신원 구조</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#0369a1;color:#fff">4</div>
+                            <div>
+                                <div class="st-t">보안·편의성 동시 달성</div>
+                                <div class="st-d">두 가지 상충 없이 동시 실현</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">성과 및 인사이트</div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">단일 장애점 완전 제거</div>
+                            <div class="ri-d">블록체인 분산 구조로 중앙 서버 의존 해소</div>
+                        </div>
+                    </div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">보안성·편의성 동시 실현</div>
+                            <div class="ri-d">선택적 공개 기반 인증 완성</div>
+                        </div>
+                    </div>
+                    <div class="ri">
+                        <div>
+                            <div class="ri-t">보험 산업 적용 확신</div>
+                            <div class="ri-d">건강·자산 민감 데이터 → 탈중앙화 신뢰 설계 필요</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r3">
+                <div class="card" style="grid-column:span 2">
+                    <div class="ct">핵심 역량</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                        <div class="step">
+                            <div class="sd" style="background:#eff6ff;color:#0369a1">🔐</div>
+                            <div>
+                                <div class="st-t">보안 설계력</div>
+                                <div class="st-d">구조적 한계 파악 → 탈중앙화 대안 설계</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="sd" style="background:#eff6ff;color:#0369a1">🔗</div>
+                            <div>
+                                <div class="st-t">도메인 연결력</div>
+                                <div class="st-d">기술 경험 → 보험·금융 문제의식 연결</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ct">기술 스택</div>
+                    <div class="techs">
+                        <span class="tech">Blockchain</span><span class="tech">DID</span>
+                        <span class="tech">Verifiable Credential</span>
+                        <span class="tech">SSI</span><span class="tech">선택적 공개</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf">
+            <span class="ft">인지원 · PROJECT ARCHIVE</span>
+            <div class="techs"><span class="tech">보안 설계</span><span class="tech">탈중앙화</span><span class="tech">팀
+                    프로젝트</span></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
