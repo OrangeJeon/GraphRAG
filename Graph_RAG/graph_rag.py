@@ -1,10 +1,7 @@
 import ollama
-from neo4j import GraphDatabase, basic_auth
+from neo4j import GraphDatabase, basic_auth, READ_ACCESS
 from neo4j_graphrag.llm.base import LLMInterface
 from neo4j_graphrag.retrievers import Text2CypherRetriever
-from neo4j_graphrag.retrievers import VectorRetriever
-from neo4j_graphrag.embeddings.base import Embedder
-from neo4j_graphrag.generation import GraphRAG
 from neo4j import GraphDatabase
 from neo4j.time import Date
 
@@ -29,74 +26,10 @@ class OllamaLLM(LLMInterface):
 
 # Neo4j 연결
 driver = GraphDatabase.driver(
-    "bolt://3.83.135.243:7687",
-    auth=basic_auth("neo4j", "interiors-representative-cranks"))
-
-# 쿼리
-cypher_query = '''
-MATCH (m:Movie {title:$movie})<-[:ACTED_IN]-(p:Person)-[:ACTED_IN]->(rec:Movie)
-RETURN DISTINCT rec.title AS recommendation LIMIT 20
-'''
-
-# Neo4j 검색
-with driver.session(database="neo4j") as session:
-    results = session.execute_read(
-        lambda tx: tx.run(cypher_query,
-                          movie="The Matrix").data())
-    recommendations = [record['recommendation'] for record in results]
-
-def generate_embedding(text):
-    response = ollama.embeddings(
-        model='tinyllama',
-        prompt= text
-    )
-    return response['embedding']
-
-def add_embedding_to_movie(tx):
-    result = tx.run("MATCH (m:Movie) WHERE m.tagline IS NOT NULL RETURN m.title AS title, m.tagline AS plot, elementId(m) AS id LIMIT 100")
-    cnt = 0
-    for record in result:
-        cnt+=1
-        print(cnt)
-        title = record["title"]
-        plot = record["plot"]
-        node_id = record["id"]
-        print(plot)
-        print("==============")
-        embedding = generate_embedding(plot)
-        tx.run("MATCH (m:Movie) WHERE elementId(m) = $id SET m.plotEmbedding = $embedding",
-               id = node_id, embedding = embedding)
-        print(f"Updated movie '{title}' with embedding")
-with driver.session() as session:
-    session.execute_write(add_embedding_to_movie)
-
-class OllamaEmbedder(Embedder):
-    def __init__(self, model_name):
-        self.model_name = model_name
-
-    def embed_query(self, text):
-        response = ollama.embeddings(model=self.model_name, prompt=text)
-        return response['embedding']
-
-embedder = OllamaEmbedder(model_name="tinyllama")
-
-retriever = VectorRetriever(
-    driver,
-    index_name="moviePlotsEmbedding",
-    embedder=embedder,
-    return_properties=["title", "tagline"]  # plot → tagline으로 변경
-)
-
-#query_text = "A cowboy doll is jealous when a new spaceman figure becomes the top toy."
-#retriever_result = retriever.search(query_text=query_text, top_k = 3)
-#print(retriever_result)
+    "neo4j://127.0.0.1:7687",
+    auth=basic_auth("neo4j", "06180618"))
 
 llm = OllamaLLM(model_name="tinyllama")
-rag = GraphRAG(retriever = retriever, llm = llm)
-
-query_text = "What movies are sad romances?"
-response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
-print(response.answer)
 
 def get_node_datatype(value):
     """
@@ -125,7 +58,7 @@ def get_schema(uri, user, password):
 
     driver = GraphDatabase.driver(
         uri, 
-        auth=basic_auth("neo4j", "interiors-representative-cranks")
+        auth=basic_auth("neo4j", "06180618")
     )
 
     with driver.session() as session:
@@ -157,7 +90,7 @@ def get_schema(uri, user, password):
         rel_direction = session.run(rel_direction_query)
 
         #스키마 딕셔너리 생성
-        schema = {"nodes": {}, "relationship": {}, "relations": {}}
+        schema = {"nodes": {}, "relationship": {}, "relations": []}
 
         for record in nodes:
             label = record["label"]
@@ -184,7 +117,7 @@ def get_schema(uri, user, password):
             schema["relations"].append(f"(:{start_label})=[:{rel_type}]->(:{end_label})")
         return schema
     
-    def format_schema(schema):
+def format_schema(schema):
         """
         스키마 딕셔너리를 LLM에 제공하기 위해 원하는 형태로 formatting
         """
@@ -208,3 +141,28 @@ def get_schema(uri, user, password):
             result.append(relation)
         return "\n".join(result)
 
+#print("get_schema 시작")
+schema = get_schema("neo4j://127.0.0.1:7687", "neo4j", "06180618")
+#print("get_schema 완료")
+neo4j_schema = format_schema(schema)
+#print("format_schema 완료")
+#print(neo4j_schema)
+
+examples = [
+   "댐 및 수도시설 관련 사업관리는? QUERY: MATCH (a:Article) WHERE a.title CONTAINS '댐' OR a.title CONTAINS '사업관리' RETURN a.content",
+    "안전관리 규정은? QUERY: MATCH (a:Article) WHERE a.title CONTAINS '안전관리' RETURN a.content",
+    "제2장에 속하는 조항은? QUERY: MATCH (a:Article)-[:BELONGS_TO_CHAPTER]->(c:Chapter) WHERE c.name CONTAINS '제2장' RETURN a.title, a.content",
+]
+
+retriever = Text2CypherRetriever(
+    driver = driver,
+    llm = llm,
+    neo4j_schema=neo4j_schema,
+    examples= examples,
+    neo4j_database="neo4j",
+)
+
+query_text = "댐 및 수도시설 관련 사업관리 알려줘"
+search_result = retriever.search(query_text=query_text)
+
+print(search_result)
