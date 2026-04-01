@@ -1,8 +1,6 @@
 """
-(Document) -[:HAS_ARTICLE]-> (Article)
-(Article) -[:BELONGS_TO_CHAPTER]-> (Chapter)
-(Article) -[:BELONGS_TO_SECTION]-> (Section)
-(Article) -[:NEXT_ARTICLE]-> (Article)  # 순서 관계
+(Document)-[:HAS_CHUNK]->(Chunk)
+(Chunk)-[:HAS_IMAGE]->(Image)
 """
 
 import json
@@ -10,44 +8,48 @@ from neo4j import GraphDatabase, basic_auth
 
 driver = GraphDatabase.driver("neo4j://127.0.0.1:7687", auth=basic_auth("neo4j", "06180618"))
 
-with open(r"C:\Users\kwater\Desktop\k-water\txt\chunks\댐 및 수도시설 등에 관한 재산권처리기준_chunks.json", "r", encoding="utf-8") as f:
+with open(r"C:\Users\kwater\Downloads\진천군수도정비기본계획보고서(2021).chunks.json", "r", encoding="utf-8") as f:
     chunks = json.load(f)
 
+
 def insert_chunk(tx, chunk):
+    # Document + Chunk 노드 생성 및 관계 연결
     tx.run("""
-        MERGE (doc:Document {title: $source_file})
-        MERGE (art:Article {chunk_id: $chunk_id})
-        SET art.article_no = $article_no,
-            art.title = $article_title,
-            art.content = $content,
-            art.heading_path = $heading_path
-        MERGE (doc)-[:HAS_ARTICLE]->(art)
+        MERGE (doc:Document {title: $source})
+        MERGE (c:Chunk {chunk_id: $chunk_id})
+        SET c.source       = $source,
+            c.heading      = $heading,
+            c.heading_path = $heading_path,
+            c.content      = $content,
+            c.pages        = $pages
+        MERGE (doc)-[:HAS_CHUNK]->(c)
     """,
-    source_file=chunk["source_file"],
-    chunk_id=chunk["chunk_id"],
-    article_no=chunk["article_no"],
-    article_title=chunk["article_title"],
-    content=chunk["content"],
-    heading_path=chunk["heading_path"]
+        source=chunk["source"],
+        chunk_id=chunk["chunk_id"],
+        heading=chunk["heading"],
+        heading_path=chunk["heading_path"],
+        content=chunk["content"],
+        pages=chunk["pages"],
     )
 
-    # 장 관계 별도 쿼리
-    if chunk.get("chapter"):
+    # 이미지 노드 생성 및 Chunk와 연결
+    for img_path in chunk.get("image_paths", []):
         tx.run("""
-            MATCH (art:Article {chunk_id: $chunk_id})
-            MERGE (ch:Chapter {name: $chapter, document: $source_file})
-            MERGE (art)-[:BELONGS_TO_CHAPTER]->(ch)
-        """, chunk_id=chunk["chunk_id"], chapter=chunk["chapter"], source_file=chunk["source_file"])
+            MATCH (c:Chunk {chunk_id: $chunk_id})
+            MERGE (img:Image {image_path: $image_path})
+            SET img.source = $source
+            MERGE (c)-[:HAS_IMAGE]->(img)
+        """,
+            chunk_id=chunk["chunk_id"],
+            image_path=img_path,
+            source=chunk["source"],
+        )
 
-    # 절 관계 별도 쿼리
-    if chunk.get("section"):
-        tx.run("""
-            MATCH (art:Article {chunk_id: $chunk_id})
-            MERGE (sec:Section {name: $section, document: $source_file})
-            MERGE (art)-[:BELONGS_TO_SECTION]->(sec)
-        """, chunk_id=chunk["chunk_id"], section=chunk["section"], source_file=chunk["source_file"])
 
 with driver.session() as session:
-    for chunk in chunks:
+    for i, chunk in enumerate(chunks):
         session.execute_write(insert_chunk, chunk)
-print("하나 끝")
+        print(f"[{i+1}/{len(chunks)}] {chunk['chunk_id']} 완료")
+
+driver.close()
+print("\n전체 업로드 완료!")
