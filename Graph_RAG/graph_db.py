@@ -8,7 +8,7 @@ from neo4j import GraphDatabase, basic_auth
 
 driver = GraphDatabase.driver("neo4j://127.0.0.1:7687", auth=basic_auth("neo4j", "06180618"))
 
-with open(r"C:\Users\kwater\Downloads\진천군수도정비기본계획보고서(2021).chunks.json", "r", encoding="utf-8") as f:
+with open(r"C:\python\Graph_RAG\진천군수도정비기본계획보고서(2021).chunks.json", "r", encoding="utf-8") as f:
     chunks = json.load(f)
 
 

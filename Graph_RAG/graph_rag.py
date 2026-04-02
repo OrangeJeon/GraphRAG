@@ -44,7 +44,7 @@ driver = GraphDatabase.driver(
     auth=basic_auth("neo4j", "06180618")
 )
 
-llm = OllamaLLM(model_name="tinyllama")
+llm = OllamaLLM(model_name="phi3:mini")
 
 
 # ── 스키마 추출 ───────────────────────────────────────────────────────────────
@@ -119,11 +119,11 @@ neo4j_schema = format_schema(schema)
 
 # ── Examples ──────────────────────────────────────────────────────────────────
 examples = [
-    "계획급수인구는? QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '계획급수인구' RETURN c.heading_path, c.content LIMIT 3",
-    "백곡정수장 개량 계획은? QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '백곡정수장' RETURN c.heading_path, c.content LIMIT 3",
-    "비상연계 방안은? QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '비상연계' RETURN c.heading_path, c.content LIMIT 3",
-    "수질관리 계획 알려줘 QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '수질관리' RETURN c.heading_path, c.content LIMIT 3",
-    "5장 내용은? QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '제 5 장' RETURN c.heading_path, c.content LIMIT 5",
+    "USER INPUT: '계획급수인구는?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '계획급수인구' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '백곡정수장 개량 계획은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '백곡정수장' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '비상연계 방안은?' QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '비상연계' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '5장 내용은?' QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '제 5 장' RETURN c.heading_path, c.content LIMIT 5",
+    "USER INPUT: '이미지가 있는 항목은?' QUERY: MATCH (c:Chunk)-[:HAS_IMAGE]->(img:Image) RETURN c.heading_path, img.image_path LIMIT 5",
 ]
 
 
@@ -137,7 +137,7 @@ retriever = Text2CypherRetriever(
     neo4j_database="neo4j",
 )
 
-query_text = "백곡정수장 개량 계획 알려줘"
+query_text = "진천군 전체 급수인구 목표가 얼마야?"
 search_result = retriever.search(query_text=query_text)
 
 print(search_result)
