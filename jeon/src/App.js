@@ -194,7 +194,7 @@ export default function Chat() {
       {/* Header */}
       <header className="chat-header">
         <div className="chat-header__left">
-          <WordmarkImg size={48} bob={loading} />
+          <WordmarkImg size={48} bob={false} />
           <div>
             <div className="chat-header__name">방울이 AI 어시스턴트</div>
           </div>
