@@ -1,6 +1,8 @@
 """
 (Document)-[:HAS_CHUNK]->(Chunk)
 (Chunk)-[:HAS_IMAGE]->(Image)
+#DB 삭제시: MATCH (n)
+        DETACH DELETE n
 """
 
 import json

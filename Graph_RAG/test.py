@@ -25,9 +25,12 @@ class OllamaLLM(LLMInterface):
 driver = GraphDatabase.driver("neo4j://127.0.0.1:7687", auth=basic_auth("neo4j", "06180618"))
 llm = OllamaLLM("phi3:mini")
 
+neo4j_schema = "Node Properties\nChunk {chunk_id: STRING, content: STRING, heading: STRING, heading_path: STRING, pages: LIST[INTEGER], source: STRING}"
+
 retriever = Text2CypherRetriever(
     driver=driver,
     llm=llm,
+    neo4j_schema=neo4j_schema,
     neo4j_database="neo4j",
 )
 

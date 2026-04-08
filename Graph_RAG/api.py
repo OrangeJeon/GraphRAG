@@ -201,9 +201,16 @@ neo4j_schema = format_schema(schema)
 examples = [
     "USER INPUT: '계획급수인구는?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '계획급수인구' RETURN c.heading_path, c.content LIMIT 3",
     "USER INPUT: '백곡정수장 개량 계획은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '백곡정수장' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '광역상수도 공급 계획 알려줘.' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '광역상수도' RETURN c.heading_path, c.content LIMIT 3",
     "USER INPUT: '비상연계 방안은?' QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '비상연계' RETURN c.heading_path, c.content LIMIT 3",
     "USER INPUT: '5장 내용은?' QUERY: MATCH (c:Chunk) WHERE c.heading_path CONTAINS '제 5 장' RETURN c.heading_path, c.content LIMIT 5",
     "USER INPUT: '이미지가 있는 항목은?' QUERY: MATCH (c:Chunk)-[:HAS_IMAGE]->(img:Image) RETURN c.heading_path, img.image_path LIMIT 5",
+    "USER INPUT: '진천군 전체 급수인구 목표가 뭐야?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '급수인구' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '수도시설 현황은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '수도시설' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '정수장 시설용량은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '정수장' AND c.content CONTAINS '시설용량' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '관망 개선 계획은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '관망' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '노후관 교체 계획 알려줘.' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '노후관' RETURN c.heading_path, c.content LIMIT 3",
+    "USER INPUT: '사업비 총액은?' QUERY: MATCH (c:Chunk) WHERE c.content CONTAINS '사업비' RETURN c.heading_path, c.content LIMIT 3",
 ]
 
 retriever = Text2CypherRetriever(
@@ -220,16 +227,28 @@ retriever = Text2CypherRetriever(
 # ────────────────────────────────────────────────────────
 def build_context_from_search_result(search_result) -> str:
     if not search_result or not getattr(search_result, "items", None):
-        return "검색 결과가 없습니다."
+        return "검색 결과가 없습니다.", []
 
     lines = []
+    image_paths = []
+
     for idx, item in enumerate(search_result.items, start=1):
+        content = item.content
+
+        # Record 객체면 딕셔너리로 변환
+        if hasattr(content, "data"):
+            data = content.data()
+        elif hasattr(content, "keys"):
+            data = dict(content)
+        else:
+            data = {"result": str(content)}
+
         lines.append(f"[검색결과 {idx}]")
-        lines.append(str(item.content))
+        for k, v in data.items():
+            lines.append(f"{k}: {v}")
         lines.append("")
 
-    return "\n".join(lines).strip()
-
+    return "\n".join(lines).strip(), image_paths
 
 # ─────────────────────────────────────────────────────────
 # Helper: answer stream
